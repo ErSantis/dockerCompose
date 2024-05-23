@@ -1,0 +1,21 @@
+version: '3'
+services:
+  proxy:
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - auth_service
+      - notes_service
+
+  auth_service:
+    build:
+      context: ./auth_service
+      dockerfile: Dockerfile
+
+  notes_service:
+    build:
+      context: ./notes_service
+      dockerfile: Dockerfile
