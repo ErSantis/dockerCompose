@@ -1,7 +1,7 @@
-GET  http://localhost/data/notes
+POST  http://localhost/auth/index/login
 Content-Type: application/json
 
 {
-    "idEstudiante": 3,
-    "notaEstudiante": 190
+    "username": "david",
+    "password": "123"
 }

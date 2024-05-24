@@ -1,25 +1,55 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Título de tu página</title>
-    <link rel="stylesheet" href="notes_styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autenticacion</title>
 </head>
-
 <body>
-    <h2>Crear Nota</h2>
-    <form action="/notes/index/create_note" method="post">
-        <label for="idE">Nombre:</label>
-        <input type="idEstudiante" id="idE" name="idEstudiante"><br><br>
-        
-        <label for="nota">Email:</label>
-        <input type="notaEstudiante" id="nota" name="notaEstudiante"><br><br>
-        
-        <input type="submit" value="Enviar">
+    <h2>Create note</h2>
+    <form id="createNoteF">
+        <label for="idEstudiante">idEstudiante:</label>
+        <input type="number" step="1" id="idEstudiante" name="idEstudiante" required>
+        <br><br>
+        <label for="notaEstudiante">noteEstudiante:</label>
+        <input type="number" id="notaEstudiante" name="notaEstudiante" required>
+        <br><br>
+        <button type="submit">create note</button>
     </form>
 
-    <div id="res" class="out">
-</body>
+    <h2>Create note</h2>
+    <form id="createNoteF">
+        <label for="idEstudiante">idEstudiante:</label>
+        <input type="number" step="1" id="idEstudiante" name="idEstudiante" required>
+        <br><br>
+        <label for="notaEstudiante">noteEstudiante:</label>
+        <input type="number" id="notaEstudiante" name="notaEstudiante" required>
+        <br><br>
+        <button type="submit">create note</button>
+    </form>
 
+    <h1>OutPut Message</h1>
+    <br><br>
+    <div id="confirmationMessage"></div>
+
+    <script>
+        document.getElementById('createNoteF').onsubmit = async function(event) {
+            event.preventDefault();
+            let idE = document.getElementById('idEstudiante').value;
+            let ntE = document.getElementById('notaEstudiante').value;
+
+            let response = await fetch('/notes/index/note', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({"idEstudiante": idE, "notaEstudiante": ntE }),
+                
+            });
+            let res = await response.json();
+            document.getElementById('confirmationMessage').innerText = JSON.stringify(res);
+        }
+    </script>
+</body>
 </html>
 

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autenticacion</title>
+</head>
+<body>
+    <h2>Create user</h2>
+    <form id="signupForm">
+        <label for="username">Username:</label>
+        <input type="text" id="user" name="user" required>
+        <br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="pwd" name="pass" required>
+        <br><br>
+        <button type="submit">Sign Up</button>
+    </form>
+
+    <h2>Authenticate Account</h2>
+    <form id="loginForm">
+        <label for="username">Username:</label>
+        <input type="text" id="user_login" name="user_login" required>
+        <br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="pwd_login" name="pwd_login" required>
+        <br><br>
+        <button type="submit">Login</button>
+    </form>
+    <h1>OutPut Message</h1>
+    <br><br>
+    <div id="confirmationMessage"></div>
+
+    <script>
+        document.getElementById('signupForm').onsubmit = async function(event) {
+            event.preventDefault();
+            let user = document.getElementById('user').value;
+            let pwd = document.getElementById('pwd').value;
+
+            let response = await fetch('/auth/index/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({"username": user, "password": pwd }),
+                
+            });
+            let res = await response.json();
+            document.getElementById('confirmationMessage').innerText = JSON.stringify(res);
+        }
+
+        document.getElementById('loginForm').onsubmit = async function(event) {
+            event.preventDefault();
+            let user_login = document.getElementById('user_login').value;
+            let pwd_login = document.getElementById('pwd_login').value;
+
+            let response = await fetch('/auth/index/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ "username": user_login, "password": pwd_login }),
+                
+            });
+            
+            let res = await response.json();
+            document.getElementById('confirmationMessage').innerText = JSON.stringify(res);
+        }
+    </script>
+</body>
+</html>

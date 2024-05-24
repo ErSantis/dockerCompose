@@ -4,11 +4,11 @@ from flask import Flask, request, jsonify, render_template
 app = Flask(__name__, template_folder='./templates')
 notes = {}
 
-@app.route('/index')
+@app.route('/notes/index')
 def index():
     return render_template("note_index.html")
 
-@app.route('/index/notes', methods=['POST'])
+@app.route('/notes/index/note', methods=['POST'])
 def create_note():
     data = request.json
     note_id = data['idEstudiante']
@@ -29,11 +29,11 @@ def create_note():
         notes[note_id] = note
         return jsonify({"message": "Note created successfully"}), 201
 
-@app.route('/notes', methods=['GET'])
+@app.route('/notes/index/note', methods=['GET'])
 def get_all_notes():
     return jsonify({"all entries": notes}),200
 
-@app.route('/index/notes/<idEstudiante>', methods=['GET'])
+@app.route('/notes/index/note/<idEstudiante>', methods=['GET'])
 def get_note(idEstudiante):
     idEstudiante = int(idEstudiante)
     if idEstudiante in notes:
@@ -41,7 +41,7 @@ def get_note(idEstudiante):
     else:
         return jsonify({"message": "Note not found", "value":idEstudiante}), 404
 
-@app.route('/index/notes/<idEstudiante>', methods=['PUT'])
+@app.route('/notes/index/note/<idEstudiante>', methods=['PUT'])
 def update_note(idEstudiante):
     idEstudiante = int(idEstudiante)
     if idEstudiante in notes:
@@ -57,7 +57,7 @@ def update_note(idEstudiante):
     else:
         return jsonify({"message": "Note not found", "Value": idEstudiante}), 404
 
-@app.route('/index/notes/<idEstudiante>', methods=['DELETE'])
+@app.route('/notes/index/note/<idEstudiante>', methods=['DELETE'])
 def delete_note(idEstudiante):
     idEstudiante = int(idEstudiante)
     if idEstudiante in notes:

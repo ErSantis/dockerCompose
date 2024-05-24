@@ -1,9 +1,13 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='./templates')
 users = {}
 
-@app.route('/signup', methods=['POST'])
+@app.route('/auth/index')
+def show_index():
+    return render_template('auth.html')
+
+@app.route('/auth/index/signup', methods=['POST'])
 def sign_up():
     data = request.json
     username = data['username']
@@ -13,7 +17,7 @@ def sign_up():
     users[username] = password
     return jsonify({"message": "User created successfully"}), 201
 
-@app.route('/login', methods=['POST'])
+@app.route('/auth/index/login', methods=['POST'])
 def log_in():
     data = request.json
     username = data['username']
