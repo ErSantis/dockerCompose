@@ -29,9 +29,9 @@ def create_note():
         notes[note_id] = note
         return jsonify({"message": "Note created successfully"}), 201
 
-@app.route('/notes/index/note', methods=['GET'])
-def get_all_notes():
-    return jsonify({"all entries": notes}),200
+#@app.route('/notes/index/note', methods=['GET'])
+#def get_all_notes():
+#    return jsonify({"all entries": notes}),200
 
 @app.route('/notes/index/note/<idEstudiante>', methods=['GET'])
 def get_note(idEstudiante):

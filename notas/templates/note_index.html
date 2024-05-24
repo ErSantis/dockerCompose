@@ -19,27 +19,27 @@
 
     <h2>update note</h2>
     <form id="updateNoteF">
-        <label for="idEstudiante">idEstudiante:</label>
-        <input type="number" step="1" id="idEstudiante" name="idEstudiante" required>
+        <label for="idEstudiante_u">idEstudiante:</label>
+        <input type="number" step="1" id="idEstudiante_u" name="idEstudiante_U" required>
         <br><br>
-        <label for="notaEstudiante">noteEstudiante:</label>
-        <input type="number" id="notaEstudiante" name="notaEstudiante" required>
+        <label for="notaEstudiante_u">noteEstudiante:</label>
+        <input type="number" id="notaEstudiante_u" name="notaEstudiante_u" required>
         <br><br>
         <button type="submit">update note</button>
     </form>
 
     <h2>get note</h2>
     <form id="getNoteF">
-        <label for="idEstudiante">idEstudiante:</label>
-        <input type="number" step="1" id="idEstudiante" name="idEstudiante" required>
+        <label for="idEstudiante_g">idEstudiante:</label>
+        <input type="number" step="1" id="idEstudiante_g" name="idEstudiante_g" required>
         <br><br>
         <button type="submit">get note</button>
     </form>
 
     <h2>delete note</h2>
     <form id="delNoteF">
-        <label for="idEstudiante">idEstudiante:</label>
-        <input type="number" step="1" id="idEstudiante" name="idEstudiante" required>
+        <label for="idEstudiante_d">idEstudiante:</label>
+        <input type="number" step="1" id="idEstudiante_d" name="idEstudiante_d" required>
         <br><br>
         <button type="submit">delete note</button>
     </form>
@@ -68,8 +68,8 @@
 
         document.getElementById('updateNoteF').onsubmit = async function(event) {
             event.preventDefault();
-            let idE = document.getElementById('idEstudiante').value;
-            let ntE = document.getElementById('notaEstudiante').value;
+            let idE = document.getElementById('idEstudiante_u').value;
+            let ntE = document.getElementById('notaEstudiante_u').value;
 
             let response = await fetch(`/notes/index/note/${idE}`, {
                 method: 'PUT',
@@ -85,15 +85,11 @@
 
         document.getElementById('getNoteF').onsubmit = async function(event) {
             event.preventDefault();
-            let idE = document.getElementById('idEstudiante').value;
-            
+            let idE = document.getElementById('idEstudiante_g').value;
 
             let response = await fetch(`/notes/index/note/${idE}`, {
                 method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({"idEstudiante": idE }),
+                
                 
             });
             let res = await response.json();
@@ -102,7 +98,7 @@
 
         document.getElementById('delNoteF').onsubmit = async function(event) {
             event.preventDefault();
-            let idE = document.getElementById('idEstudiante').value;
+            let idE = document.getElementById('idEstudiante_d').value;
 
             let response = await fetch(`/notes/index/note/${idE}`, {
                 method: 'DELETE',
