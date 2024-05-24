@@ -1,0 +1,7 @@
+POST http://localhost/notes
+Content-Type: application/json
+
+{
+    "idEstudiante": E,
+    "notaEstudiante": 100
+}
