@@ -7,15 +7,15 @@ services:
     ports:
       - "80:80"
     depends_on:
-      - auth_service
-      - notes_service
+      - auth_server
+      - notes_server
 
-  auth_service:
+  auth_server:
     build:
-      context: ./auth_service
+      context: ./auth_server
       dockerfile: Dockerfile
 
-  notes_service:
+  notes_server:
     build:
-      context: ./notes_service
+      context: ./notes_server
       dockerfile: Dockerfile

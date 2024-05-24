@@ -1,7 +1,7 @@
-POST http://localhost/notes
+GET  http://localhost/data/notes
 Content-Type: application/json
 
 {
-    "idEstudiante": E,
-    "notaEstudiante": 100
+    "idEstudiante": 3,
+    "notaEstudiante": 190
 }
