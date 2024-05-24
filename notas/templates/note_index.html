@@ -17,15 +17,31 @@
         <button type="submit">create note</button>
     </form>
 
-    <h2>Create note</h2>
-    <form id="createNoteF">
+    <h2>update note</h2>
+    <form id="updateNoteF">
         <label for="idEstudiante">idEstudiante:</label>
         <input type="number" step="1" id="idEstudiante" name="idEstudiante" required>
         <br><br>
         <label for="notaEstudiante">noteEstudiante:</label>
         <input type="number" id="notaEstudiante" name="notaEstudiante" required>
         <br><br>
-        <button type="submit">create note</button>
+        <button type="submit">update note</button>
+    </form>
+
+    <h2>get note</h2>
+    <form id="getNoteF">
+        <label for="idEstudiante">idEstudiante:</label>
+        <input type="number" step="1" id="idEstudiante" name="idEstudiante" required>
+        <br><br>
+        <button type="submit">get note</button>
+    </form>
+
+    <h2>delete note</h2>
+    <form id="delNoteF">
+        <label for="idEstudiante">idEstudiante:</label>
+        <input type="number" step="1" id="idEstudiante" name="idEstudiante" required>
+        <br><br>
+        <button type="submit">delete note</button>
     </form>
 
     <h1>OutPut Message</h1>
@@ -44,6 +60,56 @@
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({"idEstudiante": idE, "notaEstudiante": ntE }),
+                
+            });
+            let res = await response.json();
+            document.getElementById('confirmationMessage').innerText = JSON.stringify(res);
+        }
+
+        document.getElementById('updateNoteF').onsubmit = async function(event) {
+            event.preventDefault();
+            let idE = document.getElementById('idEstudiante').value;
+            let ntE = document.getElementById('notaEstudiante').value;
+
+            let response = await fetch(`/notes/index/note/${idE}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({"idEstudiante": idE, "notaEstudiante": ntE }),
+                
+            });
+            let res = await response.json();
+            document.getElementById('confirmationMessage').innerText = JSON.stringify(res);
+        }
+
+        document.getElementById('getNoteF').onsubmit = async function(event) {
+            event.preventDefault();
+            let idE = document.getElementById('idEstudiante').value;
+            
+
+            let response = await fetch(`/notes/index/note/${idE}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({"idEstudiante": idE }),
+                
+            });
+            let res = await response.json();
+            document.getElementById('confirmationMessage').innerText = JSON.stringify(res);
+        }
+
+        document.getElementById('delNoteF').onsubmit = async function(event) {
+            event.preventDefault();
+            let idE = document.getElementById('idEstudiante').value;
+
+            let response = await fetch(`/notes/index/note/${idE}`, {
+                method: 'DEL',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({"idEstudiante": idE }),
                 
             });
             let res = await response.json();
