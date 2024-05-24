@@ -1,9 +1,8 @@
-version: '3'
+version: '3.8'
+
 services:
   proxy:
-    build:
-      context: ./proxy
-      dockerfile: Dockerfile
+    build: ./proxy
     ports:
       - "80:80"
     depends_on:
@@ -11,11 +10,11 @@ services:
       - notes_service
 
   auth_service:
-    build:
-      context: ./auth_service
-      dockerfile: Dockerfile
+    build: ./auth_service
+    ports:
+      - "5000"
 
   notes_service:
-    build:
-      context: ./notes_service
-      dockerfile: Dockerfile
+    build: ./notes_service
+    ports:
+      - "5000"

@@ -1,5 +1,4 @@
-# Dockerfile for auth_service
-FROM python:3.9
+FROM python:3.9-alpine
 WORKDIR /app
 COPY auth_service.py /app
 RUN pip install flask
